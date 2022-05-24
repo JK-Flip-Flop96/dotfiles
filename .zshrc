@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux zsh-autosuggestions)
+plugins=(git tmux zsh-autosuggestions zsh-syntax-highlighting)
 
 GITSTATUS_LOG_LEVEL=DEBUG
 
@@ -114,9 +114,12 @@ alias pwsh="pwsh.exe -noLogo"
 # Aliases for default replacement programs
 
 # Exa
+alias la="exa -a --icons --group-directories-first"
 alias ls="exa --icons --group-directories-first"
-alias ll="exa -l -h --icons --group-directories-first"
+alias ll="exa -hl --icons --group-directories-first"
 alias lt="exa --tree --icons --group-directories-first"
+alias llt="exa -l --tree --icons --group-directories-first"
+alias lla="exa -ahl --icons --group-directories-first"
 
 # zoxide
 #alias cd="z"
