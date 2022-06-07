@@ -109,7 +109,10 @@ source $ZSH/oh-my-zsh.sh
 # Aliases for Windows Programs
 
 # Windows powershell
-alias pwsh="pwsh.exe -noLogo"
+alias -g pwsh="pwsh.exe -noLogo"
+
+# NCR Tools and Programs
+alias ptest="proptest.exe &"
 
 # Aliases for default replacement programs
 
@@ -121,15 +124,18 @@ alias lt="exa --tree --icons --group-directories-first"
 alias llt="exa -l --tree --icons --group-directories-first"
 alias lla="exa -ahl --icons --group-directories-first"
 
-# zoxide
-#alias cd="z"
-
 # bat
-#alias cat="bat"
+alias cat="bat"
+
+# wsl-sudo
+alias wudo="python3 ~/source/python/wsl-sudo/wsl-sudo.py"
 
 path+=('/var/lib/flatpak/exports/bin')
 
 eval "$(zoxide init zsh)"
+
+# Zoxide alias
+# alias cd="z"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
