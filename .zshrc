@@ -120,8 +120,8 @@ alias ptest="proptest.exe &"
 alias la="exa -a --icons --group-directories-first"
 alias ls="exa --icons --group-directories-first"
 alias ll="exa -hl --icons --group-directories-first"
-alias lt="exa --tree --icons --group-directories-first"
-alias llt="exa -l --tree --icons --group-directories-first"
+alias lt="exa -T --icons --group-directories-first"
+alias llt="exa -lT --icons --group-directories-first"
 alias lla="exa -ahl --icons --group-directories-first"
 
 # bat
