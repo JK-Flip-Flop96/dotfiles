@@ -131,6 +131,7 @@ alias cat="bat"
 alias wudo="python3 ~/source/python/wsl-sudo/wsl-sudo.py"
 
 path+=('/var/lib/flatpak/exports/bin')
+path+=('~/.cargo/bin')
 
 eval "$(zoxide init zsh)"
 
