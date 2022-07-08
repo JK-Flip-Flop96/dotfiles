@@ -133,10 +133,13 @@ alias wudo="python3 ~/source/python/wsl-sudo/wsl-sudo.py"
 path+=('/var/lib/flatpak/exports/bin')
 path+=('~/.cargo/bin')
 
+[ -f "/home/sm185592/.ghcup/env" ] && source "/home/sm185592/.ghcup/env" # ghcup-env
+
 eval "$(zoxide init zsh)"
 
 # Zoxide alias
-# alias cd="z"
+alias cd="z"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
