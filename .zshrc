@@ -130,11 +130,16 @@ alias cat="bat"
 # wsl-sudo
 alias wudo="python3 ~/source/python/wsl-sudo/wsl-sudo.py"
 
+# fzf
+alias fzfp="fzf --preview 'bat --style=numbers --colour=always --line-range :500 {}'" # Preview files in bat
+
+# Path Additions
 path+=('/var/lib/flatpak/exports/bin')
 path+=('~/.cargo/bin')
 
 [ -f "/home/sm185592/.ghcup/env" ] && source "/home/sm185592/.ghcup/env" # ghcup-env
 
+# Activate Zoxide
 eval "$(zoxide init zsh)"
 
 # Zoxide alias
