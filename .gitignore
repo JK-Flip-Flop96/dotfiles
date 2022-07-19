@@ -1,0 +1,64 @@
+# History Files
+.bash_history
+.zsh_history
+.lesshst
+.node_repl_history
+.python_history
+.vim_mru_files
+.wget-hsts
+.histfile
+.viminfo
+
+# Log Folders
+.landscape
+
+# Config Files
+.config
+.motd_shown
+.sudo_as_admin_successful
+
+# Language Specific Folders
+.cabal
+.cargo
+.cpanm
+.dotnet
+.ghc
+.ghcup
+.julia
+.npm
+.nuget
+.rustup
+go
+perl5
+
+# Application Specific Folders
+.oh-my-zsh
+.tmux
+.vscode-server/
+
+# Cache Files
+.cache
+.zcompdump*
+.local
+
+# Junk
+.zshrc.pre-oh-my-zsh
+
+# sh
+.profile
+
+# zsh
+.zshenv
+.zprofile
+.zlogin
+.zlogout
+
+# bash
+.bash_profile
+.bash_login
+.bash_logout
+
+
+# Other Top-level directories
+downloads/
+source/
