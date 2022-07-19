@@ -131,7 +131,7 @@ alias cat="bat"
 alias wudo="python3 ~/source/python/wsl-sudo/wsl-sudo.py"
 
 # fzf
-alias fzfp="fzf --preview 'bat --style=numbers --colour=always --line-range :500 {}'" # Preview files in bat
+alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'" # Preview files in bat
 
 # Path Additions
 path+=('/var/lib/flatpak/exports/bin')
