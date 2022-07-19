@@ -109,7 +109,7 @@ source $ZSH/oh-my-zsh.sh
 # Aliases for Windows Programs
 
 # Windows powershell
-alias -g pwsh="pwsh.exe -noLogo"
+alias -g wpsh="pwsh.exe -noLogo"
 
 # NCR Tools and Programs
 alias ptest="proptest.exe &"
