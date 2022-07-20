@@ -114,6 +114,15 @@ alias -g wpsh="pwsh.exe -noLogo"
 # NCR Tools and Programs
 alias ptest="proptest.exe &"
 
+# Aliases for built in programs
+alias mkdir="mkdir -pv" # Mkdir with default arguments
+alias mount="mount | column -t" # Output mount in a more readable format
+
+# Easier Navigation Upwards
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
 # Aliases for default replacement programs
 
 # Exa
@@ -136,8 +145,11 @@ alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 
 # Path Additions
 path+=('/var/lib/flatpak/exports/bin')
 path+=('~/.cargo/bin')
+path+=('~/.tools/finplat-tools-shared/')
 
 [ -f "/home/sm185592/.ghcup/env" ] && source "/home/sm185592/.ghcup/env" # ghcup-env
+
+export GPG_TTY=$(tty)
 
 # Activate Zoxide
 eval "$(zoxide init zsh)"
