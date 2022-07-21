@@ -33,7 +33,6 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     newline                 # \n
-    context                 # user@hostname
     dir                     # current directory
     vcs                     # git status
     # =========================[ Line #2 ]=========================
@@ -339,7 +338,7 @@
       typeset -g POWERLEVEL9K_DIR_CLASSES=()
 
       # Custom prefix.
-      typeset -g POWERLEVEL9K_DIR_PREFIX='%F{240}in%f '
+      typeset -g POWERLEVEL9K_DIR_PREFIX=''
 
       #####################################[ vcs: git status ]######################################
       # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
