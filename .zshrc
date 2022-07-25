@@ -104,7 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Aliases
+# ALIASES
 
 # Aliases for Windows Programs
 
@@ -149,7 +149,16 @@ path+=('~/.tools/finplat-tools-shared/')
 
 [ -f "/home/sm185592/.ghcup/env" ] && source "/home/sm185592/.ghcup/env" # ghcup-env
 
+# EXPORTS
+
+# Gpg
 export GPG_TTY=$(tty)
+
+# fzf
+export FZF_DEFAULT_OPTS=" \
+    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 # Activate Zoxide
 eval "$(zoxide init zsh)"
