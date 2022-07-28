@@ -145,7 +145,6 @@ alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 
 # Path Additions
 path+=('/var/lib/flatpak/exports/bin')
 path+=('~/.cargo/bin')
-path+=('~/.tools/finplat-tools-shared/')
 
 [ -f "/home/sm185592/.ghcup/env" ] && source "/home/sm185592/.ghcup/env" # ghcup-env
 
@@ -165,6 +164,20 @@ eval "$(zoxide init zsh)"
 
 # Zoxide alias
 alias cd="z"
+
+if [ -d "~/.tools/finplat-tools-shared/" ]; then
+
+    # Ensure the GPG-Agent is started
+    if ! pgrep -x -u "${USER}" gpg-agent &> /dev/null; then
+	gpg-connect-agent /bye &> /dev/null
+    fi
+
+    # Add the Linux finplat-tools-shared to the path
+    path+=('~/.tools/finplat-tools-shared/')
+
+    # Remove the winfows finplat-tools-shared directory from the path
+    export PATH=$(echo $PATH | sed -e 's/\/mnt\/c\/tools\/finplat-tools-shared\(:\|$\)//')
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
