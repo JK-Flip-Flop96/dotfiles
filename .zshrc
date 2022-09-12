@@ -151,7 +151,7 @@ path+=('~/.cargo/bin')
 # EXPORTS
 
 # Gpg
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
 
 # fzf
 export FZF_DEFAULT_OPTS=" \
