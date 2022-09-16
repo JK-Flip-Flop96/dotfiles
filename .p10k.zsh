@@ -342,7 +342,7 @@
 
       #####################################[ vcs: git status ]######################################
       # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
-      typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
+      typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='\uF126 '
 
       # Untracked files icon. It's really a question mark, your font isn't broken.
       # Change the value of this parameter to show a different icon.
@@ -369,10 +369,10 @@
 	if (( $1 )); then
 	  # Styling for up-to-date Git status.
 	  local       meta='%f'     # default foreground
-	  local      clean='%76F'   # green foreground
-	  local   modified='%178F'  # yellow foreground
-	  local  untracked='%39F'   # blue foreground
-	  local conflicted='%196F'  # red foreground
+	  local      clean='%10F'   # green foreground
+	  local   modified='%11F'  # yellow foreground
+	  local  untracked='%12F'   # blue foreground
+	  local conflicted='%9F'  # red foreground
 	else
 	  # Styling for incomplete and stale Git status.
 	  local       meta='%244F'  # grey foreground
@@ -479,7 +479,7 @@
       typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED,CONFLICTED,COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=-1
 
       # Icon color.
-      typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=76
+      typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR='#a6e3a1'
       typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=244
       # Custom icon.
       typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION=
@@ -493,8 +493,8 @@
 
       # These settings are used for repositories other than Git or when gitstatusd fails and
       # Powerlevel10k has to fall back to using vcs_info.
-      typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=76
-      typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=76
+      typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND='#a6e3a1'
+      typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='#a6e3a1'
       typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=178
 
       ##########################[ status: exit code of the last command ]###########################
