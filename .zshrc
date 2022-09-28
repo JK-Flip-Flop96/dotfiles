@@ -104,6 +104,15 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# FUNTCIONS
+
+# --fzf--
+
+# fzf Man search
+function fman() {
+	man -k . | fzf -q "$1" --prompt='man> ' --preview $'echo {} | tr -d \'()\' | awk \'{printf "%s ", $2} {print $1}\' | xargs -r man | col -bx | bat -l man -p --color always' | tr -d '()' | awk '{printf "%s ", $2} {print $1}' | xargs -r man
+}
+
 # ALIASES
 
 # Aliases for Windows Programs
@@ -140,7 +149,9 @@ alias cat="bat"
 alias wudo="python3 ~/source/python/wsl-sudo/wsl-sudo.py"
 
 # fzf
-alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'" # Preview files in bat
+alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --preview-window=right,60%,border-sharp" # Fuzzy search with file previews in bat
+alias fzh="history | fzf" # Fuzzy history Search
+alias fzm="fman" # Fuzzy man page search
 
 # Path Additions
 path+=('/var/lib/flatpak/exports/bin')
@@ -152,6 +163,13 @@ path+=('~/.cargo/bin')
 
 # Gpg
 export GPG_TTY=$TTY
+
+# Advertise True Colour Support
+export COLORTERM=truecolor
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
+export MANRORROPT="-c"
+
 
 # fzf
 export FZF_DEFAULT_OPTS=" \
