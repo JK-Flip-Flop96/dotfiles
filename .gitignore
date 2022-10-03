@@ -35,6 +35,9 @@ perl5
 .oh-my-zsh
 .tmux
 .vscode-server/
+.w3m/
+.password-store/
+.gnupg/
 
 # Cache Files
 .cache
@@ -62,3 +65,4 @@ perl5
 # Other Top-level directories
 downloads/
 source/
+.tools/
