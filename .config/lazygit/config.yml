@@ -1,0 +1,17 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+gui:
+  theme:
+    activeBorderColor:
+      - '#9399b2'
+      - bold
+    inactiveBorderColor:
+      - '#585b70'
+  showIcons: true
+  showBottomLine: false
+os:
+  editCommand: 'nvim'
+  editCommandTemplate: '{{editor}} +{{line}} -- {{filename}}'
+  openCommand: 'nvim'
