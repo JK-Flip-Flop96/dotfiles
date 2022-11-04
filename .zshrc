@@ -85,6 +85,10 @@ ZSH_TMUX_AUTOSTART=true
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=yellow"
 
+zstyle ':autocomplete:*' min-input 1
+
+zstyle ':autocomplete:recent-dirs' backend zoxide
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
