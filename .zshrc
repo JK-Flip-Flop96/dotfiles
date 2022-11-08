@@ -117,6 +117,44 @@ function fman() {
 	man -k . | fzf -q "$1" --prompt='man> ' --preview $'echo {} | tr -d \'()\' | awk \'{printf "%s ", $2} {print $1}\' | xargs -r man | col -bx | bat -l man -p --color always' | tr -d '()' | awk '{printf "%s ", $2} {print $1}' | xargs -r man
 }
 
+# fzf-yay integration from the fzf wiki
+function yzf() {
+	pos=$1
+	shift
+	sed "s/ /\t/g" | 
+		fzf --nth=$pos --multi --history="${FZF_HISTDIR:-$XDG_STATE_HOME/fzf}/history-yzf$pos" --preview-window=60%,border-left --ansi "$@" | cut -f$pos | xargs
+}
+
+# List installable packages into fzf and install selection
+function yas(){
+	cache_dir="/tmp/yas-$USER"
+	test "$1" = "-y" && rm -rf "$cache_dir" && shift
+	mkdir -p "$cache_dir"
+	preview_cache="$cache_dir/preview_{2}"
+	list_cache="$cache_dir/list"
+	{ test "$(cat "$list_cache$@" | wc -l)" -lt 50000 && rm "$list_cache$@"; } 2>/dev/null
+	pkg=$( (cat "$list_cache$@" 2>/dev/null || { pacman --color=always -Sl "$@"; yay --color=always -Sl aur "$@" } | sed 's/ [^ ]*unknown-version[^ ]*//' | tee "$list_cache$@") |
+		yzf 2 --tiebreak=index --preview="cat $preview_cache 2>/dev/null | grep -v 'Querying' | grep . || yay --color always -Si {2} | tee $preview_cache")
+	if test -n "$pkg"
+		then echo "Installing $pkg"
+			cmd="yay -S $pkg"
+			print -s "$cmd"
+			eval "$cmd"
+			rehash
+	fi
+}
+
+# List installed packages into fzf and remove selection 
+function yar(){
+	pkg=$(yay --color=always -Q "$@" | yzf 1 --tiebreak=length --preview="yay --color always -Qli {1}")
+	if test -n "$pkg"
+		then echo "Removing $pkg..."
+			cmd="yay -R --cascade --recursive $pkg"
+			print -s "$cmd"
+			eval "$cmd"
+	fi
+}
+
 # ALIASES
 
 # Aliases for Windows Programs
@@ -126,6 +164,10 @@ alias -g wpsh="pwsh.exe -noLogo"
 
 # NCR Tools and Programs
 alias ptest="proptest.exe &"
+
+# Winget
+alias -g wg="pwsh.exe -noprofile /c winget.exe"
+alias wgf="sed -e '1,3d' <<< $(wg 'search' '--query' '`"`"') | tac | fzf" 
 
 # Aliases for built in programs
 alias mkdir="mkdir -pv" # Mkdir with default arguments
@@ -163,6 +205,11 @@ path+=('~/.cargo/bin')
 
 [ -f "/home/sm185592/.ghcup/env" ] && source "/home/sm185592/.ghcup/env" # ghcup-env
 
+# Dotnet paths
+export PATH=$PATH:$HOME/.dotnet/tools
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT
+
 # EXPORTS
 
 # Gpg
@@ -181,13 +228,15 @@ export FZF_DEFAULT_OPTS=" \
     --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
     --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
+export FZF_HISTDIR="/home/sm185592/.local/state/fzf"
+
 # Activate Zoxide
 eval "$(zoxide init zsh)"
 
 # Zoxide alias
 alias cd="z"
 
-if [ -d "~/.tools/finplat-tools-shared/" ]; then
+if [ -d "/home/sm185592/.tools/finplat-tools-shared/" ]; then
 
     # Ensure the GPG-Agent is started
     if ! pgrep -x -u "${USER}" gpg-agent &> /dev/null; then
@@ -195,10 +244,10 @@ if [ -d "~/.tools/finplat-tools-shared/" ]; then
     fi
 
     # Add the Linux finplat-tools-shared to the path
-    path+=('~/.tools/finplat-tools-shared/')
+    path+=('/home/sm185592/.tools/finplat-tools-shared/')
 
     # Remove the winfows finplat-tools-shared directory from the path
-    export PATH=$(echo $PATH | sed -e 's/\/mnt\/c\/tools\/finplat-tools-shared\(:\|$\)//')
+	export PATH=$(echo $PATH | sd ':/mnt/c/tools/finplat-tools-shared' '')
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
