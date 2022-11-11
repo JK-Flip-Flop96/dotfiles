@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux zsh-autocomplete fast-syntax-highlighting)
+plugins=(git tmux vi-mode zsh-autocomplete fast-syntax-highlighting)
 
 GITSTATUS_LOG_LEVEL=DEBUG
 
@@ -90,6 +90,14 @@ zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:recent-dirs' backend zoxide
 
 source $ZSH/oh-my-zsh.sh
+
+#compdef toggl
+_toggl() {
+  eval $(env COMMANDLINE="${words[1,$CURRENT]}" _TOGGL_COMPLETE=complete-zsh  toggl)
+}
+if [[ "$(basename -- ${(%):-%x})" != "_toggl" ]]; then
+  compdef _toggl toggl
+fi
 
 # User configuration
 
@@ -201,7 +209,8 @@ alias fzm="fman" # Fuzzy man page search
 
 # Path Additions
 path+=('/var/lib/flatpak/exports/bin')
-path+=('~/.cargo/bin')
+path+=('/home/sm185592/.cargo/bin')
+path+=('/home/sm185592/.local/bin')
 
 [ -f "/home/sm185592/.ghcup/env" ] && source "/home/sm185592/.ghcup/env" # ghcup-env
 
@@ -252,4 +261,5 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 
