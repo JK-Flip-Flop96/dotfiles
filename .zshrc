@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux vi-mode zsh-autocomplete fast-syntax-highlighting)
+plugins=(git tmux zsh-autocomplete fast-syntax-highlighting)
 
 GITSTATUS_LOG_LEVEL=DEBUG
 
@@ -227,6 +227,9 @@ export GPG_TTY=$TTY
 # Advertise True Colour Support
 export COLORTERM=truecolor
 
+export LC_ALL=en_GB.UTF-8
+export LANG=en_GB.UTF-8
+
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 export MANRORROPT="-c"
 
@@ -235,7 +238,8 @@ export MANRORROPT="-c"
 export FZF_DEFAULT_OPTS=" \
     --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
     --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+	--color=border:#313244"
 
 export FZF_HISTDIR="/home/sm185592/.local/state/fzf"
 
