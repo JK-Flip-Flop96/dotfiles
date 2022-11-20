@@ -9,10 +9,10 @@
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
 import:
-  - ~/AppData/Roaming/alacritty/catppuccin/catppuccin-mocha.yml
-  #- ~/AppData/Roaming/alacritty/catppuccin/catppuccin-macchiato.yml
-  #- ~/AppData/Roaming/alacritty/catppuccin/catppuccin-frappe.yml
-  #- ~/AppData/Roaming/alacritty/catppuccin/catppuccin-latte.yml
+  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+  #- ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+  #- ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+  #- ~/.config/alacritty/catppuccin/catppuccin-latte.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -33,8 +33,8 @@ window:
   # must be at least `2`, while using a value of `0` for columns and lines will
   # fall back to the window manager's recommended size.
   dimensions:
-    columns: 283
-    lines: 59
+    columns: 120
+    lines: 50
   # Window position (changes require restart)
   #
   # Specified in number of pixels.
@@ -111,7 +111,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "FiraCode NFM Retina"
+    family: "FuraMono Nerd Font Mono"
     # The `style` can be specified to pick a specific face.
     #style: Semi-Light
     # Bold font face
@@ -147,9 +147,9 @@ font:
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
-  #offset:
-  #  x: 0
-  #  y: 0
+  offset:
+    x: 0
+    y: -1
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
   # right, increasing `y` moves the glyph upward.
@@ -378,8 +378,8 @@ font:
 # Live config reload (changes require restart)
 #live_config_reload: true
 # Shell
-shell:
-  program: "wsl ~"
+# shell:
+  #program: "wsl ~"
   #  args:
   #    - --login
   # Startup directory
@@ -681,7 +681,7 @@ mouse:
   #
   # If the same trigger is assigned to multiple actions, all of them are executed
   # in the order they were defined in.
-key_bindings:
+  #key_bindings:
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -765,7 +765,7 @@ key_bindings:
   #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
-  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  #- { key: N, mods: Control|Shift, action: SpawnNewInstance }
   # (macOS only)
   #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
   #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
