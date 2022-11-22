@@ -227,12 +227,13 @@ export GPG_TTY=$TTY
 # Advertise True Colour Support
 export COLORTERM=truecolor
 
-export LC_ALL=en_GB.UTF-8
+# export LC_ALL=en_GB.UTF-8
 export LANG=en_GB.UTF-8
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 export MANRORROPT="-c"
 
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 # fzf
 export FZF_DEFAULT_OPTS=" \
