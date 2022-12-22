@@ -125,6 +125,48 @@ function fman() {
 	man -k . | fzf -q "$1" --prompt='man> ' --preview $'echo {} | tr -d \'()\' | awk \'{printf "%s ", $2} {print $1}\' | xargs -r man | col -bx | bat -l man -p --color always' | tr -d '()' | awk '{printf "%s ", $2} {print $1}' | xargs -r man
 }
 
+function ftldr() {
+	tldr -l | fzf --preview 'tldr {} --color=always | bat --color=always --language=man --plain' --preview-window '50%,rounded,<50(up,border-bottom)' --prompt="ﳁ TLDR >"
+}
+
+function fzf-docs() {
+	batman="man {1} | col -bx | bat -l man -p --color always"
+	man -k . | sort \
+		| awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' \
+		| fzf -q "$1" --ansi --tiebreak=begin --prompt=' Man > ' --preview-window '50%,rounded,<50(up,border-bottom)' --preview "${batman}" \
+			--bind "enter:execute(man {1})" \
+			--bind "alt-c:+change-preview(cht.sh {1})+change-prompt(ﯽ Cheat > )" \
+			--bind "alt-m:+change-preview(${batman})+change-prompt( Man > ')" \
+			--bind "alt-t:+change-preview(tldr --color=always {1})+change-prompt(ﳁ TLDR >)"
+	zle reset-prompt
+}
+
+bindkey '^[h' fzf-docs
+zle -N fzf-docs
+
+function fzf-rg(){
+	declare preview='bat --color=always --style=header,numbers -H {2} {1} | grep -C3 {q}'
+
+	while getopts ':1' x; do
+		case "$x" in
+			1) list_files=1
+			preview='bat --color=always --style=header,numbers {1} | grep -C3 {q}'
+			;;
+		esac
+	done
+	shift $(( OPTIND -1 ))
+	unset x OPTARG OPTIND
+
+	rg --color=always -n ${list_files:+-1} "$1" 2> /dev/null |
+		fzf -d: \
+		--ansi \
+		--query="$1" \
+		--phony \
+		--bind="change:reload:rg -n ${list_files:+-1} --color=always {q}" \
+		--bind='enter:execute:v {1}' \
+		--preview="[[ -n {1} ]] && $preview"
+}
+
 # fzf-yay integration from the fzf wiki
 function yzf() {
 	pos=$1
@@ -162,6 +204,18 @@ function yar(){
 			eval "$cmd"
 	fi
 }
+
+# Cd to bookmarked folders
+unalias cdg 2> /dev/null
+ function cdg(){
+	local dest_dir=$(cdscuts_glob_echo | fzf)
+	if [[ $dest_dir != '' ]]; then
+		echo "$dest_dir"
+		z "$dest_dir"
+	fi
+}
+
+# --nnn--
 
 # Auto cd on quit for nnn
 function n(){
@@ -237,6 +291,7 @@ alias wudo="python3 ~/source/python/wsl-sudo/wsl-sudo.py"
 alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --preview-window=right,60%,border-sharp" # Fuzzy search with file previews in bat
 alias fzh="history | fzf" # Fuzzy history Search
 alias fzm="fman" # Fuzzy man page search
+alias fzt="ftldr" # Fuzzy tldr page search
 
 # Path Additions
 path+=('/var/lib/flatpak/exports/bin')
@@ -258,7 +313,11 @@ export GPG_TTY=$TTY
 # Advertise True Colour Support
 export COLORTERM=truecolor
 
-# export LC_ALL=en_GB.UTF-8
+# nnn
+export NNN_FCOLORS='c1e2272e0060330fc6d6abc4'
+export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
+export NNN_PLUG="p:preview-tui"
+
 export LANG=en_GB.UTF-8
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
@@ -294,6 +353,7 @@ if [ -d "/home/sm185592/.tools/finplat-tools-shared/" ]; then
     # Remove the winfows finplat-tools-shared directory from the path
 	export PATH=$(echo $PATH | sd ':/mnt/c/tools/finplat-tools-shared' '')
 fi
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
