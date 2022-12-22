@@ -224,7 +224,7 @@ local thm_yellow_macchiato="#eed49f"
 
   ################################[ prompt_char: prompt symbol ]################################
   # Green prompt symbol if the last command succeeded.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_FOREGROUND=${thm_green}
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_FOREGROUND=${thm_subtext0}
   # Blue prompt symbol for vi-command-mode
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_FOREGROUND=${thm_blue}
   # Teal prompt symbol for vi-insert-mode
@@ -249,17 +249,17 @@ local thm_yellow_macchiato="#eed49f"
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=${thm_blue}
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=${thm_lavender}
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
-      typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=${thm_blue}
+      typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=${thm_lavender}
       # Color of the anchor directory segments. Anchor segments are never shortened. The first
       # segment is always an anchor.
-      typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=${thm_blue}
+      typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=${thm_lavender}
       # Display anchor directory segments in bold.
       typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
       # Don't shorten directories that contain any of these files. They are anchors.
@@ -317,7 +317,7 @@ local thm_yellow_macchiato="#eed49f"
       # opening a directory in the file manager simply by clicking the link.
       # Can also be handy when the directory is shortened, as it allows you to see
       # the full directory that was used in previous commands.
-      typeset -g POWERLEVEL9K_DIR_HYPERLINK=false
+      typeset -g POWERLEVEL9K_DIR_HYPERLINK=true
 
       # Enable special styling for non-writable and non-existent directories. See POWERLEVEL9K_LOCK_ICON
       # and POWERLEVEL9K_DIR_CLASSES below.
@@ -381,8 +381,8 @@ local thm_yellow_macchiato="#eed49f"
 	  	'*' DEFAULT ''
       )
 
-	  typeset -g POWERLEVEL9K_DIR_DEFAULT_VISUAL_IDENTIFIER_EXPANSION=''
-	  typeset -g POWERLEVEL9K_DIR_HOME_VISUAL_IDENTIFIER_EXPANSION=''
+	  typeset -g POWERLEVEL9K_DIR_DEFAULT_VISUAL_IDENTIFIER_EXPANSION=''
+	  typeset -g POWERLEVEL9K_DIR_HOME_VISUAL_IDENTIFIER_EXPANSION=''
 	  
       # Custom prefix.
       typeset -g POWERLEVEL9K_DIR_PREFIX=''
@@ -416,6 +416,7 @@ local thm_yellow_macchiato="#eed49f"
 	if (( $1 )); then
 	  # Styling for up-to-date Git status.
 	  local       meta="%F{${thm_text}}" 		# default foreground
+	  local      title="%F{${thm_teal}}"        # teal foreground 
 	  local      clean="%F{${thm_green}}"   	# green foreground
 	  local   modified="%F{${thm_yellow}}"  	# yellow foreground
 	  local  untracked="%F{${thm_blue}}"   	# blue foreground
@@ -423,6 +424,7 @@ local thm_yellow_macchiato="#eed49f"
 	else
 	  # Styling for incomplete and stale Git status.
 	  local       meta="%F{${thm_overlay1}}"  # grey foreground
+	  local      title="%F{${thm_overlay1}}"  # grey foreground 
 	  local      clean="%F{${thm_overlay1}}"  # grey foreground
 	  local   modified="%F{${thm_overlay1}}"  # grey foreground
 	  local  untracked="%F{${thm_overlay1}}"  # grey foreground
@@ -437,7 +439,7 @@ local thm_yellow_macchiato="#eed49f"
 	  # Otherwise show the first 12 … the last 12.
 	  # Tip: To always show local branch name in full without truncation, delete the next line.
 	  (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
-	  res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+	  res+="${title}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
 	fi
 
 	if [[ -n $VCS_STATUS_TAG
@@ -450,17 +452,17 @@ local thm_yellow_macchiato="#eed49f"
 	  # Otherwise show the first 12 … the last 12.
 	  # Tip: To always show tag name in full without truncation, delete the next line.
 	  (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
-	  res+="${meta}#${clean}${tag//\%/%%}"
+	  res+="${meta}#${title}${tag//\%/%%}"
 	fi
 
 	# Display the current Git commit if there is no branch and no tag.
 	# Tip: To always display the current Git commit, delete the next line.
 	[[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&  # <-- this line
-	  res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
+	  res+="${meta}@${title}${VCS_STATUS_COMMIT[1,8]}"
 
 	# Show tracking branch name if it differs from local branch.
 	if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
-	  res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
+	  res+="${meta}:${title}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
 	fi
 
 	# Display "wip" if the latest commit's summary contains "wip" or "WIP".
@@ -531,7 +533,7 @@ local thm_yellow_macchiato="#eed49f"
       # Custom icon.
       typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION=
       # Custom prefix.
-      typeset -g POWERLEVEL9K_VCS_PREFIX=""
+      typeset -g POWERLEVEL9K_VCS_PREFIX="%F{${thm_subtext0}}on "
 
       # Show status of repositories of these types. You can add svn and/or hg if you are
       # using them. If you do, your prompt may become slow even when your current directory
