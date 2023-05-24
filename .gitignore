@@ -12,10 +12,15 @@
 # Log Folders
 .landscape
 
+# Log Files
+.toggl_log
+wiki_tui.log
+
 # Config Files
 .config
 .motd_shown
 .sudo_as_admin_successful
+.togglrc
 
 # Language Specific Folders
 .cabal
@@ -38,6 +43,7 @@ perl5
 .w3m/
 .password-store/
 .gnupg/
+.emacs.d/
 
 # Cache Files
 .cache
@@ -61,8 +67,8 @@ perl5
 .bash_login
 .bash_logout
 
-
 # Other Top-level directories
 downloads/
 source/
 .tools/
+.cdg_paths
